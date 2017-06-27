@@ -1,1 +1,13 @@
-{}
+{
+  "uploadConfigs": {
+    "dryRun": {
+      "url": "https://cubbles.world/shared",
+      "proxy": "",
+      "dryRun": true
+    },
+    "release": {
+      "url": "https://cubbles.world/shared",
+      "proxy": ""
+    }
+  }
+}
