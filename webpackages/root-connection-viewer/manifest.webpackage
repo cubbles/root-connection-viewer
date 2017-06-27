@@ -1,0 +1,172 @@
+{
+  "name": "root-connection-viewer",
+  "groupId": "",
+  "version": "0.1.0-SNAPSHOT",
+  "modelVersion": "9.1.1",
+  "docType": "webpackage",
+  "author": {
+    "name": "Edwin Gamboa",
+    "email": "edwingamboa355@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "man": [],
+  "artifacts": {
+    "apps": [
+      {
+        "artifactId": "docs",
+        "description": "Generated webpackage documentation.",
+        "runnables": [
+          {
+            "name": "docs",
+            "path": "/index.html",
+            "description": "Show the interface of this component."
+          }
+        ]
+      },
+      {
+        "artifactId": "root-connection-viewer-old",
+        "description": "App to visualize the connections of a root context",
+        "runnables": [
+          {
+            "name": "My Hello World App.",
+            "path": "/index.html",
+            "description": "Call this app as a simple demo."
+          }
+        ]
+      }
+    ],
+    "elementaryComponents": [
+      {
+        "artifactId": "root-definitions-extractor",
+        "description": "Component to extact connection info of an ad-hoc component",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface of this component."
+          }
+        ],
+        "resources": [
+          "root-definitions-extractor.html"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "cubx.core.rte@2.3.1",
+            "artifactId": "cubxpolymer"
+          }
+        ],
+        "slots": [
+          {
+            "slotId": "definitions",
+            "type": "object",
+            "direction": [
+              "output"
+            ]
+          },
+          {
+            "slotId": "buttonText",
+            "type": "string",
+            "direction": [
+              "input"
+            ],
+            "value": "Extract definitions"
+          },
+          {
+            "slotId": "buttonClass",
+            "type": "string",
+            "direction": [
+              "input"
+            ]
+          }
+        ]
+      }
+    ],
+    "compoundComponents": [
+      {
+        "artifactId": "root-connection-viewer",
+        "description": "Component to visualize the connections of a root context.",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/root-connection-viewer.css",
+          "template.html",
+          "jsFunctions.js"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "cubx-generic-component-viewer@0.1.0-SNAPSHOT",
+            "artifactId": "cubx-generic-component-viewer"
+          },
+          {
+            "artifactId": "root-definitions-extractor"
+          },
+          {
+            "webpackageId": "bootstrap-3.3.5@1.1.1",
+            "artifactId": "bootstrap"
+          }
+        ],
+        "slots": [],
+        "members": [
+          {
+            "memberId": "defsExtractor",
+            "artifactId": "root-definitions-extractor"
+          },
+          {
+            "memberId": "componentViewer",
+            "artifactId": "cubx-generic-component-viewer"
+          }
+        ],
+        "connections": [
+          {
+            "connectionId": "defsConnection",
+            "source": {
+              "memberIdRef": "defsExtractor",
+              "slot": "definitions"
+            },
+            "destination": {
+              "memberIdRef": "componentViewer",
+              "slot": "definitions"
+            },
+            "hookFunction": "window.rootConnectionViewer.openViewerModal",
+            "repeatedValues": true
+          }
+        ],
+        "inits": [
+          {
+            "slot": "viewerHeight",
+            "value": "25em",
+            "memberIdRef": "componentViewer"
+          },
+          {
+            "slot": "buttonClass",
+            "value": "btn btn-primary right-float",
+            "memberIdRef": "defsExtractor"
+          },
+          {
+            "slot": "buttonText",
+            "value": "View dataflow",
+            "memberIdRef": "defsExtractor"
+          }
+        ]
+      }
+    ],
+    "utilities": [
+    ]
+  }
+}
