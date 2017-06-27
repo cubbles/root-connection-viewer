@@ -23,17 +23,6 @@
             "description": "Show the interface of this component."
           }
         ]
-      },
-      {
-        "artifactId": "root-connection-viewer-old",
-        "description": "App to visualize the connections of a root context",
-        "runnables": [
-          {
-            "name": "My Hello World App.",
-            "path": "/index.html",
-            "description": "Call this app as a simple demo."
-          }
-        ]
       }
     ],
     "elementaryComponents": [
