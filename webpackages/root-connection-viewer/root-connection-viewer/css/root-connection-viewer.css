@@ -4,4 +4,5 @@
 .right-float {
     position: fixed !important;
     right: 20px;
+    z-index: 1000;
 }
