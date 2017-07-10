@@ -1,7 +1,7 @@
 {
   "name": "root-connection-viewer",
   "groupId": "",
-  "version": "1.0.1-SNAPSHOT",
+  "version": "1.0.1",
   "modelVersion": "9.1.1",
   "docType": "webpackage",
   "author": {
@@ -154,8 +154,10 @@
             "value": {
               "webpackageId": "cubx-generic-component-viewer@1.0.1",
               "artifactId": "cubx-generic-component-viewer",
-              "inits": { "viewerHeight": "20em" },
-              "dependencies":[
+              "inits": {
+                "viewerHeight": "20em"
+              },
+              "dependencies": [
                 {
                   "webpackageId": "bootstrap-3.3.5@1.1.1",
                   "artifactId": "bootstrap-bootstrap-css-only"
