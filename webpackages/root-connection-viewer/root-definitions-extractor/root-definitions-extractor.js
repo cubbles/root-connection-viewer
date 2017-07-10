@@ -49,6 +49,17 @@
     },
 
     /**
+     * Add class to the button, when 'readyEvent' slot changes
+     * @param readyEvent
+     */
+    modelReadyEventChanged: function (readyEvent) {
+      document.addEventListener(readyEvent, function () {
+        this.$$('button').style.display = 'block';
+        console.log('document');
+      }.bind(this));
+    },
+
+    /**
      * Method to be called when 'button' is clicked
      * @param event
      */

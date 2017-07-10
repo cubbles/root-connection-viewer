@@ -5,16 +5,16 @@
 (function () {
   'use strict';
 
-  // set namespace containing the cubx-webpackage-viewer functions (i.e. hook functions)
+  // set namespace containing the root-connection-viewer functions (i.e. hook functions)
   window.rootConnectionViewer = {
     // Open the modal containing the viewer
     openViewerModal: function (definitions, next) {
-      var viewerModal = $('#dataflow_view_modal');
+      var viewerModal = $('#iframe_view_modal');
       viewerModal.on('shown.bs.modal', function (e) {
-        document.querySelector('cubx-generic-component-viewer').setScale('auto');
+        document.querySelector('cubx-iframe-viewer').setSlotChange({slot: 'scale', value: 'auto'});
       });
       viewerModal.modal('show');
-      next(definitions);
+      next({slot: 'definitions', value: definitions});
     }
   };
 })();

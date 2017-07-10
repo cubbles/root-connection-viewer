@@ -72,6 +72,13 @@
             "direction": [
               "input"
             ]
+          },
+          {
+            "slotId": "readyEvent",
+            "type": "string",
+            "direction": [
+              "input"
+            ]
           }
         ]
       }
@@ -99,8 +106,8 @@
         ],
         "dependencies": [
           {
-            "webpackageId": "cubx-generic-component-viewer@1.0.0",
-            "artifactId": "cubx-generic-component-viewer"
+            "webpackageId": "cubx-iframe-viewer@1.0.0",
+            "artifactId": "cubx-iframe-viewer"
           },
           {
             "artifactId": "root-definitions-extractor"
@@ -118,7 +125,7 @@
           },
           {
             "memberId": "componentViewer",
-            "artifactId": "cubx-generic-component-viewer"
+            "artifactId": "cubx-iframe-viewer"
           }
         ],
         "connections": [
@@ -130,7 +137,7 @@
             },
             "destination": {
               "memberIdRef": "componentViewer",
-              "slot": "definitions"
+              "slot": "slotChange"
             },
             "hookFunction": "window.rootConnectionViewer.openViewerModal",
             "repeatedValues": true
@@ -138,8 +145,28 @@
         ],
         "inits": [
           {
-            "slot": "viewerHeight",
-            "value": "25em",
+            "slot": "readyEvent",
+            "value": "iframeCifReady",
+            "memberIdRef": "defsExtractor"
+          },
+          {
+            "slot": "artifactInfo",
+            "value": {
+              "webpackageId": "cubx-generic-component-viewer@1.0.1",
+              "artifactId": "cubx-generic-component-viewer",
+              "inits": { "viewerHeight": "20em" },
+              "dependencies":[
+                {
+                  "webpackageId": "bootstrap-3.3.5@1.1.1",
+                  "artifactId": "bootstrap-bootstrap-css-only"
+                }
+              ]
+            },
+            "memberIdRef": "componentViewer"
+          },
+          {
+            "slot": "height",
+            "value": "350em",
             "memberIdRef": "componentViewer"
           },
           {

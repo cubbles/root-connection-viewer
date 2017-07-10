@@ -1,6 +1,6 @@
 <template id="root-connection-viewer">
     <root-definitions-extractor  member-id-ref="defsExtractor" class="col-md-12"> </root-definitions-extractor>
-    <div class="modal fade" id='dataflow_view_modal'>
+    <div class="modal fade" id='iframe_view_modal'>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -8,7 +8,7 @@
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <cubx-generic-component-viewer member-id-ref="componentViewer"></cubx-generic-component-viewer>
+                    <cubx-iframe-viewer member-id-ref="componentViewer"></cubx-iframe-viewer>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
