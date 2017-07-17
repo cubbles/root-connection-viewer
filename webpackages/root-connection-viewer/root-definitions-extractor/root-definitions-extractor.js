@@ -72,10 +72,10 @@
      * @param readyEvent
      */
     modelReadyEventChanged: function (readyEvent) {
-      if (this.getDisableButton()) {
-        return;
-      }
       document.addEventListener(readyEvent, function () {
+        if (this.getDisableButton()) {
+          return;
+        }
         this.$$('button').style.display = 'block';
       }.bind(this));
     },
