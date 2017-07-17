@@ -59,6 +59,13 @@
             ]
           },
           {
+            "slotId": "disableButton",
+            "type": "boolean",
+            "direction": [
+              "input"
+            ]
+          },
+          {
             "slotId": "buttonText",
             "type": "string",
             "direction": [
@@ -170,6 +177,11 @@
             "slot": "height",
             "value": "350em",
             "memberIdRef": "componentViewer"
+          },
+          {
+            "slot": "disableButton",
+            "value": true,
+            "memberIdRef": "defsExtractor"
           },
           {
             "slot": "buttonClass",

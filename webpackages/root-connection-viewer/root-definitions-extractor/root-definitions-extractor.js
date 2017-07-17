@@ -38,6 +38,22 @@
      * Manipulate an element’s local DOM when the cubbles framework is initialized and ready to work.
      */
     cubxReady: function () {
+      // Handle shortcut (Alt + Shift + v)
+      document.addEventListener('keyup', function (e) {
+        if (e.altKey && e.shiftKey && e.keyCode === 86) {
+          this.extractAndSetDefinitions();
+        }
+      }.bind(this), false);
+    },
+
+    /**
+     * Add class to the button, when 'disableButton' slot changes
+     * @param disableButton
+     */
+    modelDisableButtonChanged: function (disableButton) {
+      if (disableButton) {
+        this.$$('button').style.display = 'none';
+      }
     },
 
     /**
@@ -45,6 +61,9 @@
      * @param newClass
      */
     modelButtonClassChanged: function (newClass) {
+      if (this.getDisableButton()) {
+        return;
+      }
       this.$$('button').className += ' ' + newClass;
     },
 
@@ -53,9 +72,11 @@
      * @param readyEvent
      */
     modelReadyEventChanged: function (readyEvent) {
+      if (this.getDisableButton()) {
+        return;
+      }
       document.addEventListener(readyEvent, function () {
         this.$$('button').style.display = 'block';
-        console.log('document');
       }.bind(this));
     },
 
@@ -63,7 +84,7 @@
      * Method to be called when 'button' is clicked
      * @param event
      */
-    setExtractAndSetDefinitions: function (event) {
+    extractAndSetDefinitions: function (event) {
       this.componentsDefs = {};
       this.membersDefs = {};
       this.slotsDefs = {};
