@@ -13,12 +13,12 @@ The html file should contain the desire component using its tag, e.g. the `<root
 ```
 Note that the `webpackageId` should be provided, which in this case is: `root-connection-viewer@1.1.0`.
 Additionally, this component can be initialized using the `<cubx-core-slot-init>` tag (available from _cubx.core.rte@1.9.0_).
-For example, lets initialize the `keyCombination` slot to get the basic package of ckeditor:
+For example, lets initialize the `shortcut` slot to get the basic package of ckeditor:
 ```html
 <root-connection-viewer cubx-webpackage-id="root-connection-viewer@1.1.0"></root-connection-viewer>
 	<!--Initilization-->
 	<cubx-core-init style="display:none">
-		<cubx-core-slot-init slot="keyCombination">[ "alt", "v" ]</cubx-core-slot-init>
+		<cubx-core-slot-init slot="shortcut">[ "alt", "v" ]</cubx-core-slot-init>
 	</cubx-core-init>
 </root-connection-viewer>
 ```
@@ -28,7 +28,7 @@ var component= document.querySelector('root-connection-viewer');
 // Wait until CIF is ready
 document.addEventListener('cifReady', function() {
 	// Manipulate slots
-	component.setKeyCombination([ "alt", "v" ]);
+	component.setShortcut([ "alt", "v" ]);
 });
 ```
 [Want to get to know the Cubbles Platform?](https://cubbles.github.io)

@@ -88,7 +88,7 @@
             ]
           },
           {
-            "slotId": "keyCombination",
+            "slotId": "shortcut",
             "description": "Array containing the key names of modifiers ('ctrl', 'alt', 'shift' and 'meta') and key value (printable character) of the keys to be used, e.g. ['Alt', 'v'].",
             "type": "array",
             "direction": [
@@ -143,7 +143,7 @@
             ]
           },
           {
-            "slotId": "keyCombination",
+            "slotId": "shortcut",
             "description": "Array containing the key names of modifiers ('ctrl', 'alt', 'shift' and 'meta') and keys values (or keyCodes) of the keys to be used, e.g. ['alt', 'v'] or ['alt', '86'].",
             "type": "array",
             "direction": [
@@ -186,13 +186,13 @@
             }
           },
           {
-            "connectionId": "keyCombinationCon",
+            "connectionId": "shortcutCon",
             "source": {
-              "slot": "keyCombination"
+              "slot": "shortcut"
             },
             "destination": {
               "memberIdRef": "defsExtractor",
-              "slot": "keyCombination"
+              "slot": "shortcut"
             }
           }
         ],

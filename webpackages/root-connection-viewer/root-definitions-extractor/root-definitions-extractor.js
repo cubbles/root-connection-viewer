@@ -39,10 +39,10 @@
      */
     cubxReady: function () {
       document.addEventListener('keyup', function (e) {
-        var keyCombinationAchieved = this.getKeyCombination().every(function (key) {
+        var shortcutAchieved = this.getShortcut().every(function (key) {
           return e[key.toLowerCase() + 'Key'] || e.key === key;
         });
-        if (keyCombinationAchieved) {
+        if (shortcutAchieved) {
           this.extractAndSetDefinitions();
         }
       }.bind(this), false);
@@ -70,17 +70,17 @@
     },
 
     /**
-     * Add class to the button, when 'keyCombination' slot changes
-     * @param keyCombination
+     * Add class to the button, when 'shortcut' slot changes
+     * @param shortcut
      */
-    modelKeyCombinationChanged: function (keyCombination) {
-      if (!this._validKeyCombination(keyCombination)) {
+    modelShortcutChanged: function (shortcut) {
+      if (!this._validShortcut(shortcut)) {
         console.warn('Invalid key combination. Remember that it starts with a modifier: \'ctrl\', ' +
           '\'alt\', \'shift\' and \'meta\'. And you should use printable values of keys.\n' +
-          'Default value would be use: [\'alt\', \'v\']', keyCombination);
-        this.model.keyCombination = ['alt', 'v'];
+          'Default value would be use: [\'alt\', \'v\']', shortcut);
+        this.model.shortcut = ['alt', 'v'];
       }
-      this.$$('#extractInfoB').setAttribute('title', this.getKeyCombination().join('+'));
+      this.$$('#extractInfoB').setAttribute('title', this.getShortcut().join('+'));
     },
 
     /**
@@ -109,14 +109,14 @@
     },
 
     /**
-     * Indicates whether a 'keyCombination' array is valid.
-     * @param {Array} keyCombination - Array containing key names (e.g. 'ctrl') or values (e.g 'v').
+     * Indicates whether a 'shortcut' array is valid.
+     * @param {Array} shortcut - Array containing key names (e.g. 'ctrl') or values (e.g 'v').
      * @returns {boolean}
      * @private
      */
-    _validKeyCombination: function (keyCombination) {
+    _validShortcut: function (shortcut) {
       var validModifierNames = ['ctrl', 'alt', 'shift', 'meta'];
-      return keyCombination.every(function (key) {
+      return shortcut.every(function (key) {
         return typeof key === 'string' &&
           (key.length === 1 || validModifierNames.indexOf(key.toLowerCase()) !== -1);
       });
