@@ -38,20 +38,22 @@
      * Manipulate an element’s local DOM when the cubbles framework is initialized and ready to work.
      */
     cubxReady: function () {
-      // Handle shortcut (Alt + Shift + v)
       document.addEventListener('keyup', function (e) {
-        if (e.altKey && e.shiftKey && e.keyCode === 86) {
+        var keyCombinationAchieved = this.getKeyCombination().every(function (key) {
+          return e[key.toLowerCase() + 'Key'] || e.key === key;
+        });
+        if (keyCombinationAchieved) {
           this.extractAndSetDefinitions();
         }
       }.bind(this), false);
     },
 
     /**
-     * Add class to the button, when 'disableButton' slot changes
-     * @param disableButton
+     * Add class to the button, when 'buttonVisible' slot changes
+     * @param buttonVisible
      */
-    modelDisableButtonChanged: function (disableButton) {
-      if (disableButton) {
+    modelButtonVisibleChanged: function (buttonVisible) {
+      if (buttonVisible) {
         this.$$('button').style.display = 'none';
       }
     },
@@ -61,10 +63,24 @@
      * @param newClass
      */
     modelButtonClassChanged: function (newClass) {
-      if (this.getDisableButton()) {
+      if (this.getButtonVisible()) {
         return;
       }
       this.$$('button').className += ' ' + newClass;
+    },
+
+    /**
+     * Add class to the button, when 'keyCombination' slot changes
+     * @param keyCombination
+     */
+    modelKeyCombinationChanged: function (keyCombination) {
+      if (!this._validKeyCombination(keyCombination)) {
+        console.warn('Invalid key combination. Remember that it starts with a modifier: \'ctrl\', ' +
+          '\'alt\', \'shift\' and \'meta\'. And you should use printable values of keys.\n' +
+          'Default value would be use: [\'alt\', \'v\']', keyCombination);
+        this.model.keyCombination = ['alt', 'v'];
+      }
+      this.$$('#extractInfoB').setAttribute('title', this.getKeyCombination().join('+'));
     },
 
     /**
@@ -73,7 +89,7 @@
      */
     modelReadyEventChanged: function (readyEvent) {
       document.addEventListener(readyEvent, function () {
-        if (this.getDisableButton()) {
+        if (this.getButtonVisible()) {
           return;
         }
         this.$$('button').style.display = 'block';
@@ -90,6 +106,20 @@
       this.slotsDefs = {};
       this.connectionDefs = [];
       this.setDefinitions(this._getDefsFromConnections(window.cubx.CRC._root.Context._connectionMgr._connections));
+    },
+
+    /**
+     * Indicates whether a 'keyCombination' array is valid.
+     * @param {Array} keyCombination - Array containing key names (e.g. 'ctrl') or values (e.g 'v').
+     * @returns {boolean}
+     * @private
+     */
+    _validKeyCombination: function (keyCombination) {
+      var validModifierNames = ['ctrl', 'alt', 'shift', 'meta'];
+      return keyCombination.every(function (key) {
+        return typeof key === 'string' &&
+          (key.length === 1 || validModifierNames.indexOf(key.toLowerCase()) !== -1);
+      });
     },
 
     /**

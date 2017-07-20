@@ -28,7 +28,7 @@
     "elementaryComponents": [
       {
         "artifactId": "root-definitions-extractor",
-        "description": "Component to extact connection info of an ad-hoc component",
+        "description": "Component to extract connection info of an ad-hoc component",
         "runnables": [
           {
             "name": "demo",
@@ -59,7 +59,7 @@
             ]
           },
           {
-            "slotId": "disableButton",
+            "slotId": "buttonVisible",
             "type": "boolean",
             "direction": [
               "input"
@@ -86,6 +86,15 @@
             "direction": [
               "input"
             ]
+          },
+          {
+            "slotId": "keyCombination",
+            "description": "Array containing the key names of modifiers ('ctrl', 'alt', 'shift' and 'meta') and key value (printable character) of the keys to be used, e.g. ['Alt', 'v'].",
+            "type": "array",
+            "direction": [
+              "input"
+            ],
+            "value": ["alt", "v"]
           }
         ]
       }
@@ -113,7 +122,7 @@
         ],
         "dependencies": [
           {
-            "webpackageId": "cubx-iframe-viewer@1.0.0",
+            "webpackageId": "cubx-iframe-viewer@1.1.0",
             "artifactId": "cubx-iframe-viewer"
           },
           {
@@ -124,7 +133,24 @@
             "artifactId": "bootstrap"
           }
         ],
-        "slots": [],
+        "slots": [
+          {
+            "slotId": "buttonVisible",
+            "description": "Boolean indicating whether the button that opens model should be visible.",
+            "type": "boolean",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "keyCombination",
+            "description": "Array containing the key names of modifiers ('ctrl', 'alt', 'shift' and 'meta') and keys values (or keyCodes) of the keys to be used, e.g. ['alt', 'v'] or ['alt', '86'].",
+            "type": "array",
+            "direction": [
+              "input"
+            ]
+          }
+        ],
         "members": [
           {
             "memberId": "defsExtractor",
@@ -148,6 +174,26 @@
             },
             "hookFunction": "window.rootConnectionViewer.openViewerModal",
             "repeatedValues": true
+          },
+          {
+            "connectionId": "buttonVisibleCon",
+            "source": {
+              "slot": "buttonVisible"
+            },
+            "destination": {
+              "memberIdRef": "defsExtractor",
+              "slot": "buttonVisible"
+            }
+          },
+          {
+            "connectionId": "keyCombinationCon",
+            "source": {
+              "slot": "keyCombination"
+            },
+            "destination": {
+              "memberIdRef": "defsExtractor",
+              "slot": "keyCombination"
+            }
           }
         ],
         "inits": [
@@ -159,11 +205,8 @@
           {
             "slot": "artifactInfo",
             "value": {
-              "webpackageId": "cubx-generic-component-viewer@1.0.1",
+              "webpackageId": "cubx-generic-component-viewer@1.1.0",
               "artifactId": "cubx-generic-component-viewer",
-              "inits": {
-                "viewerHeight": "20em"
-              },
               "dependencies": [
                 {
                   "webpackageId": "bootstrap-3.3.5@1.1.1",
@@ -172,16 +215,6 @@
               ]
             },
             "memberIdRef": "componentViewer"
-          },
-          {
-            "slot": "height",
-            "value": "350em",
-            "memberIdRef": "componentViewer"
-          },
-          {
-            "slot": "disableButton",
-            "value": true,
-            "memberIdRef": "defsExtractor"
           },
           {
             "slot": "buttonClass",
