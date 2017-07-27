@@ -132,11 +132,13 @@
         connectionId: contextConnection.connectionId,
         copyValue: contextConnection.copyValue,
         destination: {
-          memberIdRef: contextConnection.destination.memberId,
+          memberIdRef: contextConnection.destination.memberId ||
+          contextConnection.destination.component.getAttribute('member-id'),
           slot: contextConnection.destination.slot
         },
         source: {
-          memberIdRef: contextConnection.source.memberId,
+          memberIdRef: contextConnection.source.memberId ||
+          contextConnection.source.component.getAttribute('member-id'),
           slot: contextConnection.source.slot
         },
         hookFunction: contextConnection.hookFunction,
@@ -166,9 +168,11 @@
           this.componentsDefs[artifactId].slots.push(slotDefId);
         }
       }
-      if (!this.membersDefs.hasOwnProperty(connectionComponent.memberId)) {
-        this.membersDefs[connectionComponent.memberId] = {
-          memberId: connectionComponent.memberId,
+      var memberId = connectionComponent.memberId ||
+        connectionComponent.component.getAttribute('member-id');
+      if (!this.membersDefs.hasOwnProperty(memberId)) {
+        this.membersDefs[memberId] = {
+          memberId: memberId,
           artifactId: artifactId
         };
       }
