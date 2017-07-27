@@ -53,7 +53,9 @@
      * @param buttonVisible
      */
     modelButtonVisibleChanged: function (buttonVisible) {
-      if (buttonVisible) {
+      if (buttonVisible && this._readyToShowButton) {
+        this.$$('button').style.display = 'block';
+      } else {
         this.$$('button').style.display = 'none';
       }
     },
@@ -63,9 +65,6 @@
      * @param newClass
      */
     modelButtonClassChanged: function (newClass) {
-      if (this.getButtonVisible()) {
-        return;
-      }
       this.$$('button').className += ' ' + newClass;
     },
 
@@ -89,10 +88,10 @@
      */
     modelReadyEventChanged: function (readyEvent) {
       document.addEventListener(readyEvent, function () {
+        this._readyToShowButton = true;
         if (this.getButtonVisible()) {
-          return;
+          this.$$('button').style.display = 'block';
         }
-        this.$$('button').style.display = 'block';
       }.bind(this));
     },
 
