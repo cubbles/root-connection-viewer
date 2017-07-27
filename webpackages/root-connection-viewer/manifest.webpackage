@@ -112,7 +112,12 @@
             "path": "/demo/index.html",
             "description": "Demo app..."
           },
+
           {
+            "name": "Dynamic Connections demo",
+            "path": "/demo/dynamicConnection.html",
+            "description": "Demo app..."
+          },{
             "name": "docs",
             "path": "/docs/index.html",
             "description": "Show the interface and dataflow of this component."

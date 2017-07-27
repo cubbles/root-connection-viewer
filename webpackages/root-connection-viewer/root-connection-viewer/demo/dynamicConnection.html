@@ -29,19 +29,43 @@
         <cubx-core-slot-init slot="buttonVisible">true</cubx-core-slot-init>
     </cubx-core-init>
 </root-connection-viewer>
-<cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@1.3" id="textarea1">
+<cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@1.3">
     <cubx-core-init style="display:none">
         <cubx-core-slot-init slot="label">"Textarea 1"</cubx-core-slot-init>
         <cubx-core-slot-init slot="value">"Value of textarea 1"</cubx-core-slot-init>
     </cubx-core-init>
-    <cubx-core-connections style="display:none">
-        <cubx-core-connection connection-id="valueCon" source="value" destination="textarea2:value"></cubx-core-connection>
-    </cubx-core-connections>
 </cubx-textarea>
-<cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@1.3" id="textarea2">
+<cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@1.3">
     <cubx-core-init style="display:none">
         <cubx-core-slot-init slot="label">"Textarea 2"</cubx-core-slot-init>
     </cubx-core-init>
 </cubx-textarea>
+
+<button id="addDynConBtn" disabled>Add Dynamic Connection</button>
+<script>
+    (function () {
+        'use strict';
+        document.addEventListener('cifReady', function () {
+            var addDynConBtn = document.querySelector('#addDynConBtn');
+            addDynConBtn.removeAttribute('disabled');
+            addDynConBtn.addEventListener('click', function () {
+                var sourceTextArea = document.querySelectorAll('cubx-textarea')[0];
+                var destinationTextArea = document.querySelectorAll('cubx-textarea')[1];
+
+                var dynCon = new window.cubx.cif.DynamicConnection();
+
+
+                dynCon.setSourceRuntimeId(sourceTextArea.getAttribute('runtime-id'));
+                dynCon.setSourceSlot('cols');
+                dynCon.setDestinationRuntimeId(destinationTextArea.getAttribute('runtime-id'));
+                dynCon.setDestinationSlot('cols');
+                dynCon.setDirectExecution(true);
+
+                sourceTextArea.addDynamicConnection(dynCon);
+                addDynConBtn.setAttribute('disabled', 'disabled');
+            });
+        });
+    })();
+</script>
 </body>
 </html>
