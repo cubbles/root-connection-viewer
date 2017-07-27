@@ -1,5 +1,9 @@
 {
   "uploadConfigs": {
+    "sandbox": {
+      "url": "https://cubbles.world/sandbox",
+      "proxy": ""
+    },
     "dryRun": {
       "url": "https://cubbles.world/shared",
       "proxy": "",

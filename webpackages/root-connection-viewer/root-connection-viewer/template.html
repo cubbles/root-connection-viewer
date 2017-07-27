@@ -1,17 +1,17 @@
 <template id="root-connection-viewer">
-    <root-definitions-extractor  member-id-ref="defsExtractor" class="col-md-12"> </root-definitions-extractor>
+    <root-definitions-extractor  member-id-ref="defsExtractor"> </root-definitions-extractor>
     <div class="modal fade" id='iframe_view_modal'>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <span class="close">&times;</span>
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
-                    <cubx-iframe-viewer member-id-ref="componentViewer"></cubx-iframe-viewer>
+                    <cubx-generic-component-viewer member-id-ref="componentViewer"></cubx-generic-component-viewer>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="close-footer">Close</button>
                 </div>
             </div>
         </div>

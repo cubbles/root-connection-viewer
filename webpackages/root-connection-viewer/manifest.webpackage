@@ -1,7 +1,7 @@
 {
   "name": "root-connection-viewer",
   "groupId": "",
-  "version": "1.2.0-SNAPSHOT",
+  "version": "1.1.1-SNAPSHOT",
   "modelVersion": "9.1.1",
   "docType": "webpackage",
   "author": {
@@ -125,15 +125,11 @@
         ],
         "dependencies": [
           {
-            "webpackageId": "cubx-iframe-viewer@1.1.0",
-            "artifactId": "cubx-iframe-viewer"
+            "webpackageId": "cubx-generic-component-viewer@1.1.1",
+            "artifactId": "cubx-generic-component-viewer"
           },
           {
             "artifactId": "root-definitions-extractor"
-          },
-          {
-            "webpackageId": "bootstrap-3.3.5@1.1.1",
-            "artifactId": "bootstrap"
           }
         ],
         "slots": [
@@ -161,7 +157,7 @@
           },
           {
             "memberId": "componentViewer",
-            "artifactId": "cubx-iframe-viewer"
+            "artifactId": "cubx-generic-component-viewer"
           }
         ],
         "connections": [
@@ -173,7 +169,7 @@
             },
             "destination": {
               "memberIdRef": "componentViewer",
-              "slot": "slotChange"
+              "slot": "definitions"
             },
             "hookFunction": "window.rootConnectionViewer.openViewerModal",
             "repeatedValues": true
@@ -202,22 +198,8 @@
         "inits": [
           {
             "slot": "readyEvent",
-            "value": "iframeCifReady",
+            "value": "cifReady",
             "memberIdRef": "defsExtractor"
-          },
-          {
-            "slot": "artifactInfo",
-            "value": {
-              "webpackageId": "cubx-generic-component-viewer@1.1.0",
-              "artifactId": "cubx-generic-component-viewer",
-              "dependencies": [
-                {
-                  "webpackageId": "bootstrap-3.3.5@1.1.1",
-                  "artifactId": "bootstrap-bootstrap-css-only"
-                }
-              ]
-            },
-            "memberIdRef": "componentViewer"
           },
           {
             "slot": "buttonClass",

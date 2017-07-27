@@ -1,4 +1,3 @@
-/* globals $ */
 /**
  * Contains hookFunctions for component travel-planner
  */
@@ -9,18 +8,33 @@
   window.rootConnectionViewer = {
     // Open the modal containing the viewer
     openViewerModal: function (definitions, next) {
-      var viewerModal = $('#iframe_view_modal');
-      viewerModal.on('shown.bs.modal', function (e) {
-        document.querySelector('cubx-iframe-viewer').setHeight('95%');
-        document.querySelector('cubx-iframe-viewer').setSlotChange({slot: 'viewerHeight', value: '80%'});
-        document.querySelector('cubx-iframe-viewer').setSlotChange({slot: 'scale', value: 'auto'});
-      });
-      viewerModal.modal('show');
-      next({slot: 'definitions', value: definitions});
+      document.querySelector('#iframe_view_modal').style.display = 'block';
+      setTimeout(function (e) {
+        document.querySelector('cubx-generic-component-viewer').setViewerHeight('80%');
+        document.querySelector('cubx-generic-component-viewer').setScale('auto');
+      }, 900);
+      next(definitions);
     }
   };
 
-  document.addEventListener('cifReady', function () {
-    document.querySelector('.modal-body').style.height = window.innerHeight * 0.7 + 'px';
+  document.addEventListener('cifReady', function setUpModal () {
+    document.querySelector('.modal-body').style.height = window.innerHeight * 0.8 + 'px';
+    var modal = document.querySelector('#iframe_view_modal');
+    // Get the <span> element that closes the modal
+    var spanClose = modal.querySelector('.close');
+    spanClose.onclick = function () {
+      modal.style.display = 'none';
+    };
+
+    var footerClose = modal.querySelector('.close-footer');
+    footerClose.onclick = function () {
+      modal.style.display = 'none';
+    };
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
   });
 })();
