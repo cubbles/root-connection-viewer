@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>&lt;root-connection-viewer&gt; demo</title>
 
-    <script src="../../../cubx.core.rte@2.3.1/webcomponents-lite/webcomponents-lite.js"></script>
+    <script src="../../../cubx.core.rte@2.4.0/webcomponents-lite/webcomponents-lite.js"></script>
 
     <script>
         window.cubx = {
@@ -19,7 +19,7 @@
             }
         }
     </script>
-    <script src="../../../cubx.core.rte@2.3.1/crc-loader/js/main.js" data-crcinit-loadcif="true"></script>
+    <script src="../../../cubx.core.rte@2.4.0/crc-loader/js/main.js" data-crcinit-loadcif="true"></script>
 
 </head>
 <body>
@@ -29,31 +29,35 @@
         <cubx-core-slot-init slot="buttonVisible">true</cubx-core-slot-init>
     </cubx-core-init>
 </root-connection-viewer>
-<cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@1.3">
+<cubx-textarea id="textarea1" cubx-webpackage-id="com.incowia.basic-html-components@1.3">
     <cubx-core-init style="display:none">
         <cubx-core-slot-init slot="label">"Textarea 1"</cubx-core-slot-init>
         <cubx-core-slot-init slot="value">"Value of textarea 1"</cubx-core-slot-init>
+        <cubx-core-slot-init slot="cols">50</cubx-core-slot-init>
     </cubx-core-init>
 </cubx-textarea>
-<cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@1.3">
+<cubx-textarea id="textarea2" cubx-webpackage-id="com.incowia.basic-html-components@1.3">
     <cubx-core-init style="display:none">
         <cubx-core-slot-init slot="label">"Textarea 2"</cubx-core-slot-init>
+        <cubx-core-slot-init slot="cols">5</cubx-core-slot-init>
     </cubx-core-init>
 </cubx-textarea>
 
 <button id="addDynConBtn" disabled>Add Dynamic Connection</button>
+<button id="setColsBtn" disabled>Set random cols</button>
+
 <script>
     (function () {
         'use strict';
         document.addEventListener('cifReady', function () {
             var addDynConBtn = document.querySelector('#addDynConBtn');
+            var setColsBtn = document.querySelector('#setColsBtn');
             addDynConBtn.removeAttribute('disabled');
+            var sourceTextArea = document.querySelector('#textarea1');
             addDynConBtn.addEventListener('click', function () {
-                var sourceTextArea = document.querySelectorAll('cubx-textarea')[0];
-                var destinationTextArea = document.querySelectorAll('cubx-textarea')[1];
+                var destinationTextArea = document.querySelector('#textarea2');
 
                 var dynCon = new window.cubx.cif.DynamicConnection();
-
 
                 dynCon.setSourceRuntimeId(sourceTextArea.getAttribute('runtime-id'));
                 dynCon.setSourceSlot('cols');
@@ -63,7 +67,11 @@
 
                 sourceTextArea.addDynamicConnection(dynCon);
                 addDynConBtn.setAttribute('disabled', 'disabled');
+                setColsBtn.removeAttribute('disabled');
             });
+            setColsBtn.addEventListener('click', function () {
+                sourceTextArea.setCols(Math.floor((Math.random() * 100) + 1));
+            })
         });
     })();
 </script>

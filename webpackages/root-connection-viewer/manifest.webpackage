@@ -46,7 +46,7 @@
         ],
         "dependencies": [
           {
-            "webpackageId": "cubx.core.rte@2.3.1",
+            "webpackageId": "cubx.core.rte@2.4.0",
             "artifactId": "cubxpolymer"
           }
         ],
@@ -130,8 +130,8 @@
         ],
         "dependencies": [
           {
-            "webpackageId": "cubx-generic-component-viewer@1.1.1",
-            "artifactId": "cubx-generic-component-viewer"
+            "webpackageId": "cubx-iframe-viewer@1.1.1",
+            "artifactId": "cubx-iframe-viewer"
           },
           {
             "artifactId": "root-definitions-extractor"
@@ -162,7 +162,7 @@
           },
           {
             "memberId": "componentViewer",
-            "artifactId": "cubx-generic-component-viewer"
+            "artifactId": "cubx-iframe-viewer"
           }
         ],
         "connections": [
@@ -174,7 +174,7 @@
             },
             "destination": {
               "memberIdRef": "componentViewer",
-              "slot": "definitions"
+              "slot": "slotChange"
             },
             "hookFunction": "window.rootConnectionViewer.openViewerModal",
             "repeatedValues": true
